@@ -1,20 +1,11 @@
-# @app      pluie/alpine-apache
-# @author   a-Sansara https://git.pluie.org/pluie/docker-images
+FROM smebberson/alpine-base:2.0.0
+MAINTAINER Scott Mebberson <scott@scottmebberson.com>
 
-FROM pluie/alpine
+# Install apache
+RUN apk add --no-cache apache2=2.4.17-r4 apache2-utils=2.4.17-r4
 
-MAINTAINER a-Sansara https://github.com/a-sansara
+# Add the files
+ADD root /
 
-ADD files.tar /scripts
-
-ENV      SHENV_NAME=Apache \
-        SHENV_COLOR=67 \
-   HTTP_SERVER_NAME=site.docker \
-            WWW_DIR=www \
-          WWW_INDEX=index.php \
-      FIX_OWNERSHIP=1 \
-      TZ=Europe/Paris
-
-EXPOSE 80
-
-RUN bash /scripts/install.sh
+# Expose the ports for apache
+EXPOSE 80 443
