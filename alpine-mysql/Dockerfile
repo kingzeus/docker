@@ -1,14 +1,12 @@
-FROM pluie/alpine
+FROM alpine:latest
+MAINTAINER WangXian <xian366@126.com>
 
-MAINTAINER a-Sansara https://github.com/a-sansara
+WORKDIR /app
+VOLUME /app
+COPY startup.sh /startup.sh
 
-ADD files.tar /scripts
-
-ENV  SHENV_NAME=Mysql \
-    SHENV_COLOR=132
+RUN apk add --update mysql mysql-client && rm -f /var/cache/apk/*
+COPY my.cnf /etc/mysql/my.cnf
 
 EXPOSE 3306
-
-VOLUME ["/var/lib/mysql", "/dump"]
-
-RUN bash /scripts/install.sh
+CMD ["/startup.sh"]
