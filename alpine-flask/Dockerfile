@@ -26,5 +26,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY app.ini /app.ini
 COPY entrypoint.sh /entrypoint.sh
 
+RUN ["chmod", "+x", "/entrypoint.sh"]
 # exectute start up script
-ENTRYPOINT chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
