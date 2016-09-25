@@ -1,27 +1,12 @@
-############################################################
-# Dockerfile to build mysql server container images
-# Based on ARM distrib for Raspberry
-############################################################
+FROM alpine:latest
+MAINTAINER WangXian <xian366@126.com>
 
+WORKDIR /app
+VOLUME /app
+COPY startup.sh /startup.sh
 
-FROM tarzan79/alpine-base:latest
-MAINTAINER Philip Van <phucvd.ce@gmail.com>
-
-COPY ./startup.sh /
-
-RUN chmod +x /startup.sh \
- && apk --update add mariadb \
- && addgroup mysql mysql \
- && rm -rf /var/lib/mysql \
- && mkdir -p /var/lib/mysql \
- && chown -R mysql:mysql /var/lib/mysql \
- && chown -R mysql:mysql /etc/mysql/ \
- && rm -rf /var/cache/apk/*
-
-VOLUME /var/lib/mysql /var/log/mysql /etc/mysql/ /tmp
+RUN apk add --update mysql mysql-client && rm -f /var/cache/apk/*
+COPY my.cnf /etc/mysql/my.cnf
 
 EXPOSE 3306
-USER mysql
-
-ENTRYPOINT [ "/startup.sh" ]
-CMD [ "mysqld", "--user=mysql" ]
+CMD ["/startup.sh"]
