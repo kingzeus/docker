@@ -9,4 +9,4 @@ RUN apk add curl libxml2-dev libxslt-dev libffi-dev gcc musl-dev libgcc openssl-
 RUN pip3 install scrapy
 #CMD ["sh"]
 
-ENTRYPOINT ["/usr/bin/scrapy"]
+ENTRYPOINT ["scrapy"]
