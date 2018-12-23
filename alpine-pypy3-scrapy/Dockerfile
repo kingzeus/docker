@@ -12,4 +12,4 @@ RUN pip3 install scrapy
 VOLUME /data
 
 #CMD ["sh"]
-ENTRYPOINT ["scrapy"]
+ENTRYPOINT scrapy;pypy3
