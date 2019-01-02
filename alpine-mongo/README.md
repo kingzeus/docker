@@ -1,9 +1,10 @@
-# docker-alpine-mongo
+[![license_badge](https://img.shields.io/github/license/mvertes/docker-alpine-mongo.svg)](https://github.com/mvertes/docker-alpine-mongo/blob/master/LICENSE)
+[![docker_build_badge](https://img.shields.io/docker/automated/mvertes/alpine-mongo.svg)](https://hub.docker.com/r/mvertes/alpine-mongo/)
+[![idocker_image_badge](https://images.microbadger.com/badges/image/mvertes/alpine-mongo.svg)](https://hub.docker.com/r/mvertes/alpine-mongo/)
+[![docker_pulls_badge](https://img.shields.io/docker/pulls/mvertes/alpine-mongo.svg)](https://hub.docker.com/r/mvertes/alpine-mongo/)
 
-This repository contains Dockerfile for [MongoDB 3.2](https://www.mongodb.org)
-container, based on the [Alpine 3.3](https://hub.docker.com/_/alpine/) image.
-
-Why ? the official mongo image size: 317 MB, alpine-mongo: 133 MB
+This repository contains Dockerfile for [MongoDB 4.0](https://www.mongodb.org)
+container, based on the [Alpine edge](https://hub.docker.com/_/alpine/) image.
 
 ## Install
 
@@ -30,11 +31,6 @@ with the volume -v option:
 	  -v /somewhere/onmyhost/mydatabase:/data/db \
 	  mvertes/alpine-mongo
 
-Now, on the same host where the mongodb container is running, to trace
-database network activity in real-time:
-
-	$ docker exec -ti mongo mongosniff
-
 To run a shell session:
 
     $ docker exec -ti mongo sh
@@ -45,7 +41,7 @@ To use the mongo shell client:
 
 The mongo shell client can also be run its own container: 
 
-	$ docker run -ti --rm --name mongoshell monogo host:port/db
+	$ docker run -ti --rm --name mongoshell mongo host:port/db
 
 ## Limitations
 
