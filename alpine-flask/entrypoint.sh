@@ -1,7 +1,11 @@
 #!/bin/bash
 if [ ! -f /debug0 ]; then
+	if [ -e requirements_image.txt ]; then
+		apk add --no-cache $(cat requirements_image.txt) 
+	fi
+
 	if [ -e requirements.txt ]; then
-		pip install -r requirements.txt
+		pip3 install -r requirements.txt
 	fi
 
 	touch /debug0
@@ -19,8 +23,7 @@ if [ ! -f /debug0 ]; then
 				touch /debug1
                         	;;
 	                o)
-				apk add --no-cache docker
-				apk add shadow --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+				apk add --no-cache docker shadow
 				groupmod -g ${OPTARG} docker
 				gpasswd -a nginx docker
         	                ;;
@@ -33,7 +36,7 @@ fi
 
 if [ -e /debug1 ]; then
 	echo "Running app in debug mode!"
-	python app.py
+	python3 app.py
 else
 	echo "Running app in production mode!"
 	nginx && uwsgi --ini /app.ini
