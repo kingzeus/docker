@@ -2,7 +2,7 @@ FROM alpine:3.7
 MAINTAINER Christian Gatzlaff <cgatzlaff@gmail.com>
 
 # basic flask environment
-RUN apk add --no-cache bash git nginx uwsgi uwsgi-python3 \
+RUN apk add --no-cache nginx uwsgi uwsgi-python3 \
     && pip3 install --upgrade pip \
     && pip3 install flask
 
@@ -26,5 +26,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY app.ini /app.ini
 COPY entrypoint.sh /entrypoint.sh
 
+RUN chmod +x "/entrypoint.sh"
 # exectute start up script
 ENTRYPOINT ["/entrypoint.sh"]
