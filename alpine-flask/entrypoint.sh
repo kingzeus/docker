@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 if [ ! -f /debug0 ]; then
 	if [ -e requirements_image.txt ]; then
-		apk add --no-cache $(cat requirements_image.txt) 
+		apk add --no-cache $(cat requirements_image.txt)
 	fi
 
 	if [ -e requirements.txt ]; then
